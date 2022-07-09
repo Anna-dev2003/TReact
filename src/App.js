@@ -3,69 +3,25 @@
 import React from 'react' 
 import './App.css';
 
+import './index.css'
 
-const Home = (props) => {
-  return <div>Home page</div>;
-};
+import { UserCard } from './UserCard.js';
+import { UserCardText } from './UserCardText.js';
+import { From } from './Form.js'
+import { TryLCMeth } from './TryLCMeth.js'
 
-const News  = (props) => {
-  return <div>News  page</div>;
-};
 
-const CallBack  = (props) => {
-  return <div>CallBack page</div>;
-};
-
-const Contacts = (props) => {
-  return <div>Contacts page</div>;
-};
 
 class App extends React.Component{
 
-  state = {currentPage: 'home'}
-
-  renderPage = () => {
-
-    let current = this.state.currentPage;
-
-
-    if(current === 'home'){
-      return <Home/>
-    }else if(current === 'news'){
-      return <News/>
-    }else if(current === 'callback'){
-      return <CallBack/>
-    }else if(current === 'contacts'){
-      return <Contacts/>
-    }
-
-  }
+  state = {name: 'Ann', surName: 'Kat', age: '18'}
   
-
-  change = (event) => {
-
-    this.setState({currentPage: event.target.id})
-  }
-
-
   render(){
-    return <div> 
-      <div className='nav'>
-        <span id='home' onClick={this.change} className='nav-item'>
-          Home
-        </span>
-        <span id='news' onClick={this.change} className='nav-item'>
-          News
-        </span>
-        <span id='callback' onClick={this.change} className='nav-item'>
-          CallBack
-        </span>
-        <span id='contacts' onClick={this.change} className='nav-item'>
-          Contacts
-        </span>
-      </div>
-      <div className='inf'>{this.renderPage()}</div>
-        
+    return <div className="container">
+        <TryLCMeth/>
+       <UserCard data={this.state} />
+       <UserCardText data={this.state}/>
+       <From/>
     </div>
   };
 }
