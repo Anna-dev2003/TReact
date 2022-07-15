@@ -17,5 +17,14 @@ code {
   margin-left: 30px;
 }
 .indent{
-  margin-bottom: 30px;
+  /* margin-left: 200px; */
+  position: relative;
+  top: 0;
+  left: 200px;
+}
+
+.square{
+  width: 100px;
+  height: 100px;
+  background: royalblue;
 }

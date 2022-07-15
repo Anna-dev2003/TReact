@@ -1,30 +1,52 @@
+import React from "react";
 
+export class App extends React.Component{
 
-import React from 'react' 
-import './App.css';
+    constructor(props) {
+        super(props);
+        this.state = {
+          error: null,
+          isLoaded: false,
+          items: []
+        };
+    }
 
-import './index.css'
+    componentDidMount(){
+        fetch('https://jsonplaceholder.typicode.com/albums')
+          .then(res => res.json())
+            .then((result) => {
 
-import { UserCard } from './UserCard.js';
-import { UserCardText } from './UserCardText.js';
-import { From } from './Form.js'
-import { TryLCMeth } from './TryLCMeth.js'
+                this.setState({
+                    isLoaded: true,
+                    items: result,
+                })
+            }, (error) =>{
+                this.setState({
+                    isLoaded: true,
+                    error,
+                })
+            })
+    }
 
+    render(){
 
-
-class App extends React.Component{
-
-  state = {name: 'Ann', surName: 'Kat', age: '18'}
-  
-  render(){
-    return <div className="container">
-        <TryLCMeth/>
-       <UserCard data={this.state} />
-       <UserCardText data={this.state}/>
-       <From/>
-    </div>
-  };
+        const {error, isLoaded, items} = this.state;
+        console.log(items)
+        if(error){
+            return <div>Error</div>
+        }else if(!isLoaded){
+            return <div>Loading...</div>
+        }else{
+            return (
+                <ul>
+                    {items.map((album) => (
+                        <li key={album.id}>
+                            Album`s ID:{album.id} ----- Album`s index:{items.indexOf(album)} ----- Album`s name:{album.title}
+                        </li>
+                        )
+                    )}
+                </ul>
+            )
+        }
+    }
 }
-
-
-export default App;
