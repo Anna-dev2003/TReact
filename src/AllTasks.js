@@ -1,46 +1,51 @@
 
 import React from "react";
 
-// import { App } from "./App";
+import UserApp from "./HOC-part1/UserApp";
+import { LoaderHOC } from "./HOC-part2/LoaderHOC";
+import { App } from "./render-props/App";
+import { Routes } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
+import './index.css'
+// import ContactsList from "./HOC-part2/ContactsList";
 
-import './App.css'
-import { AppWithContext } from "./AppWithContext";
-import { DataProvider } from "./Context";
-import { Refs } from "./refs/Refs";
-import { VideoPlayer } from "./VideoPlayer/VideoPlayer";
+const Users = () => {
+    return <div>
+        Contacts
+        <UserApp/>
+    </div>
+}
+
+const Contacts = () => {
+    return <div>
+        Users
+        <LoaderHOC/>
+    </div>
+}
+
+const Posts = () => {
+    return <div>
+        Posts
+        <App/>
+    </div>
+}
 
 
-
-export function AllTasks() {
+export const AllTasks = () => {
     return (
         <div className="container">
-            <p>
-                task 1 part1
-            </p>
-            {/* <App/> */}
+            <div className="links">
+                <Link className="link" to='/'>Users</Link>
+                <Link className="link" to='/contacts'>Contacts</Link>
+                <Link className="link" to='/posts'>Posts</Link>
 
-            <p>
-                task-1 part-2
-            </p>
-            {/* <DataProvider>
-                <AppWithContext />
-            </DataProvider> */}
-
-            <p>
-                task-3 part-1
-            </p>
-            {/* <Refs/> */}
-
-            <p>
-                task-3 part-2
-            </p>
-            <VideoPlayer/>
-    
-            
-
-
+            </div>
+            <Routes>
+                <Route path="/" element={<Contacts/>}/>
+                <Route path="contacts" element={<Users/>}/>
+                <Route path="/posts" element={<Posts/>}/>
+            </Routes>
         </div>
     )
 }
 
-// export AllTasks
